@@ -8,11 +8,11 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private InputAction look;
     [SerializeField] private InputAction jump;
     [SerializeField] private InputAction crouch;
-    [SerializeField] private InputAction sprint; // ⬅️ UPDATED
+    [SerializeField] private InputAction sprint; 
 
     [Header("Movement Settings")]
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float sprintSpeed = 8f; // ⬅️ UPDATED
+    [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
 
@@ -36,7 +36,7 @@ public class MovementManager : MonoBehaviour
         look.Enable();
         jump.Enable();
         crouch.Enable();
-        sprint.Enable(); // ⬅️ UPDATED
+        sprint.Enable();
     }
 
     private void OnDisable()
@@ -45,7 +45,7 @@ public class MovementManager : MonoBehaviour
         look.Disable();
         jump.Disable();
         crouch.Disable();
-        sprint.Disable(); // ⬅️ UPDATED
+        sprint.Disable();
     }
 
     private void Start()
@@ -68,7 +68,6 @@ public class MovementManager : MonoBehaviour
         Vector2 input = move.ReadValue<Vector2>();
         Vector3 direction = transform.right * input.x + transform.forward * input.y;
 
-        // ⬅️ UPDATED: choose correct speed
         float currentSpeed = speed;
         if (isCrouching)
             currentSpeed = crouchSpeed;
@@ -77,7 +76,6 @@ public class MovementManager : MonoBehaviour
 
         controller.Move(direction * currentSpeed * Time.deltaTime);
 
-        // Gravity
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
