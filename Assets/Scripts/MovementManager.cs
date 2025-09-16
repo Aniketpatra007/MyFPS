@@ -19,6 +19,8 @@ public class MovementManager : MonoBehaviour
     [Header("Look Settings")]
     [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private Transform playerCamera;
+    [SerializeField] private float minLookY = -80f;
+    [SerializeField] private float maxLookY = 80f;
 
     [Header("Crouch Settings")]
     [SerializeField] private float crouchHeight = 1f;
@@ -94,7 +96,7 @@ public class MovementManager : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        rotationX = Mathf.Clamp(rotationX, minLookY, maxLookY);
         playerCamera.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
     }
 
